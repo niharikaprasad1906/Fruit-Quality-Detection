@@ -1279,7 +1279,14 @@ elif selected_page == "ℹ️ Model Information":
     st.markdown("### 🔲 Evaluation Confusion Matrix")
     cm_img_path = PROJECT_ROOT / "segmented_confusion_matrix.png"
     if cm_img_path.exists():
-        st.image(str(cm_img_path), caption="Normalized confusion matrix on 640-sample test split", use_container_width=True)
+        cm_img_b64 = base64.b64encode(cm_img_path.read_bytes()).decode("ascii")
+        st.markdown(
+            f'<img src="data:image/png;base64,{cm_img_b64}" '
+            'alt="Normalized confusion matrix on 640-sample test split" '
+            'style="display:block;width:100%;height:auto;">',
+            unsafe_allow_html=True,
+        )
+        st.caption("Normalized confusion matrix on 640-sample test split")
     else:
         st.warning("The evaluation confusion matrix is unavailable. Include `segmented_confusion_matrix.png` in the deployed app files.")
 

@@ -1,0 +1,15 @@
+# Tested with Python 3.12.3; select Python 3.12 in Streamlit Community Cloud.
+numpy==2.4.4
+pandas==3.0.3
+scikit-learn==1.8.0
+joblib==1.5.3
+opencv-python-headless==4.13.0.92
+pillow==12.3.0
+
+# U2-Net background removal (CPU)
+rembg==2.0.87
+onnxruntime==1.32.0
+
+# Streamlit application and evaluation utilities
+streamlit==1.57.0
+matplotlib==3.10.9

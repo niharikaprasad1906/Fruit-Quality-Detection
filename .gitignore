@@ -1,0 +1,58 @@
+# ── Python ──────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# ── Virtual environments ────────────────────────────
+venv/
+.venv/
+env/
+.env
+
+# ── Streamlit ───────────────────────────────────────
+.streamlit/secrets.toml
+
+# ── SQLite database (ephemeral, regenerated at runtime) ──
+prediction_history.db
+
+# ── Large dataset — do NOT upload to GitHub ─────────
+Original Image/
+dataset/
+app.py.txt
+fruit_features - backup.csv
+
+# ── Old / duplicate model files (not used by the app) ──
+best_segmented_random_forest.pkl
+models/fruit_quality_model.pkl
+
+# ── Generated output / reports ──────────────────────
+random_forest_tuning_results.csv
+class_weight_comparison.csv
+model_comparison_results.csv
+segmented_classification_report.csv
+segmented_confusion_matrix.png
+segmented_feature_importance.csv
+segmented_feature_importance.png
+
+# ── Notebooks / temp ────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+*.log
+
+# ── OS ──────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE ─────────────────────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

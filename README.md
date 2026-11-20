@@ -123,7 +123,8 @@ Fruit-Quality-Grading/
 ├── requirements.txt                   # Application dependencies
 ├── README.md                          # Complete project documentation
 ├── fruit_features_segmented.csv       # Extracted features dataset (3,200 records)
-├── prediction_history.db              # Local SQLite database for audit history
+├── .streamlit/
+│   └── config.toml                    # Streamlit theme and upload configuration
 │
 ├── app_modules/                       # Reusable application modules
 │   ├── __init__.py
@@ -147,12 +148,17 @@ Fruit-Quality-Grading/
 └── segmented_confusion_matrix.png     # Saved evaluation confusion matrix plot
 ```
 
+The original image dataset, generated evaluation outputs, and local SQLite
+history database are not required for deployment. Dataset samples will not be
+available in the app unless provided separately; image uploads work without
+them.
+
 ---
 
 ## 💻 Installation Guide (Windows)
 
 ### Prerequisites
-- Python 3.10, 3.11, or 3.12 installed on Windows.
+- Python 3.12 installed on Windows.
 - Standard Command Prompt or PowerShell.
 
 ### Step 1: Open Terminal in Project Folder
@@ -183,6 +189,25 @@ py -m streamlit run app.py
 
 The application will launch automatically in your default browser at:
 `http://localhost:8501`
+
+## ☁️ Deploying from GitHub with Streamlit Community Cloud
+
+1. Push the application files to GitHub, including `app.py`, `app_modules/`,
+   `models/best_fruit_quality_model.pkl`, `requirements.txt`, and
+   `.streamlit/config.toml`. The hero image under `assets/` is optional.
+2. In [Streamlit Community Cloud](https://share.streamlit.io/), create an app
+   from the repository and select the branch and `app.py` as the main file.
+3. Select Python **3.12** in the app's advanced settings, then deploy.
+
+The pinned dependencies were checked with the included model on Python 3.12.
+The model file is about 66 MiB and must be present in the repository at the
+path above. The first analysis may download U²-Net model weights (~176 MB), so
+the app needs outbound network access and enough memory for CPU inference.
+Prediction history is stored in a local SQLite file and is ephemeral on
+Streamlit Community Cloud; it may be lost when the app restarts or redeploys.
+
+The `Original Image/` dataset is excluded by `.gitignore` to avoid uploading
+thousands of sample photos. The app supports uploaded images without it.
 
 ---
 

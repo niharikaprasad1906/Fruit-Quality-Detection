@@ -9,6 +9,7 @@ from pathlib import Path
 import base64
 import time
 import io
+import html
 import pandas as pd
 import numpy as np
 from PIL import Image
@@ -577,6 +578,28 @@ def get_sample_dataset_images():
     return samples
 
 
+def render_pil_image(image: Image.Image, caption: str) -> None:
+    preview = image.convert("RGB")
+    preview.thumbnail((1200, 1200))
+    image_buffer = io.BytesIO()
+    preview.save(image_buffer, format="JPEG", quality=85, optimize=True)
+    image_data = base64.b64encode(image_buffer.getvalue()).decode("ascii")
+    safe_caption = html.escape(caption)
+    st.markdown(
+        f"""
+        <figure style="margin:0;width:100%;text-align:center;">
+            <img src="data:image/jpeg;base64,{image_data}"
+                 alt="{safe_caption}"
+                 style="display:block;width:100%;max-height:420px;object-fit:contain;border-radius:8px;">
+            <figcaption style="margin-top:0.4rem;color:#c8d8c8;font-size:0.85rem;">
+                {safe_caption}
+            </figcaption>
+        </figure>
+        """,
+        unsafe_allow_html=True
+    )
+
+
 # --------------------------------------------------
 # SIDEBAR NAVIGATION & SYSTEM STATUS
 # --------------------------------------------------
@@ -893,10 +916,10 @@ elif selected_page == "🔍 Fruit Quality Analysis":
 
         # Display image preview
         if selected_image_pil is not None:
-            st.image(
-                selected_image_pil,
-                caption=f"Selected: {selected_filename} ({selected_image_pil.size[0]}×{selected_image_pil.size[1]} px)",
-                use_container_width=True
+            render_pil_image(selected_image_pil, "Selected fruit image")
+            st.caption(
+                f"Selected: {selected_filename} "
+                f"({selected_image_pil.size[0]}×{selected_image_pil.size[1]} px)"
             )
 
             # Analyze Button
@@ -959,16 +982,14 @@ elif selected_page == "🔍 Fruit Quality Analysis":
 
             image_col1, image_col2 = st.columns(2)
             with image_col1:
-                st.image(
+                render_pil_image(
                     st.session_state.current_image_pil,
-                    caption="Uploaded fruit",
-                    width="stretch"
+                    "Uploaded fruit"
                 )
             with image_col2:
-                st.image(
+                render_pil_image(
                     st.session_state.segmentation_data["preview_white_bg"],
-                    caption="Segmented fruit",
-                    width="stretch"
+                    "Segmented fruit"
                 )
 
             card_class = "result-card-fresh" if is_fresh else "result-card-rotten"
@@ -1041,15 +1062,15 @@ elif selected_page == "🖼️ Image Segmentation":
 
         with col_s1:
             st.markdown("#### 1. Original Image")
-            st.image(orig, caption="Raw photograph input", use_container_width=True)
+            render_pil_image(orig, "Raw photograph input")
 
         with col_s2:
             st.markdown("#### 2. U²-Net Mask (Alpha)")
-            st.image(seg["mask_pil"], caption="Binary foreground mask (224×224)", use_container_width=True)
+            render_pil_image(seg["mask_pil"], "Binary foreground mask (224×224)")
 
         with col_s3:
             st.markdown("#### 3. Segmented Fruit")
-            st.image(seg["preview_white_bg"], caption="Isolated fruit on clean background", use_container_width=True)
+            render_pil_image(seg["preview_white_bg"], "Isolated fruit on clean background")
 
         st.markdown("<br>", unsafe_allow_html=True)
 

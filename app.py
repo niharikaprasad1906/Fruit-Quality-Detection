@@ -1270,6 +1270,8 @@ elif selected_page == "ℹ️ Model Information":
         class_sub["support"] = class_sub["support"].astype(int)
         class_sub.columns = ["Precision (%)", "Recall (%)", "F1-Score (%)", "Support (Test Count)"]
         st.dataframe(class_sub, use_container_width=True)
+    else:
+        st.warning("The evaluation report is unavailable. Include `segmented_classification_report.csv` in the deployed app files.")
 
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -1278,6 +1280,8 @@ elif selected_page == "ℹ️ Model Information":
     cm_img_path = PROJECT_ROOT / "segmented_confusion_matrix.png"
     if cm_img_path.exists():
         st.image(str(cm_img_path), caption="Normalized confusion matrix on 640-sample test split", use_container_width=True)
+    else:
+        st.warning("The evaluation confusion matrix is unavailable. Include `segmented_confusion_matrix.png` in the deployed app files.")
 
 
 # ==================================================

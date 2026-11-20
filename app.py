@@ -1206,23 +1206,23 @@ elif selected_page == "ℹ️ Model Information":
                 </tr>
                 <tr style="border-bottom: 1px solid #e2e8f0; height: 36px;">
                     <td style="font-weight: 600; color: #475569;">Number of Estimators</td>
-                    <td style="color: #1e293b; font-weight: 600;">300 Decision Trees</td>
+                    <td style="color: #2e7d32; font-weight: 600;">300 Decision Trees</td>
                 </tr>
                 <tr style="border-bottom: 1px solid #e2e8f0; height: 36px;">
                     <td style="font-weight: 600; color: #475569;">Class Weighting</td>
-                    <td style="color: #1e293b; font-weight: 600;">balanced_subsample</td>
+                    <td style="color: #2e7d32; font-weight: 600;">balanced_subsample</td>
                 </tr>
                 <tr style="border-bottom: 1px solid #e2e8f0; height: 36px;">
                     <td style="font-weight: 600; color: #475569;">Random State</td>
-                    <td style="color: #1e293b; font-weight: 600;">42 (Reproducible)</td>
+                    <td style="color: #2e7d32; font-weight: 600;">42 (Reproducible)</td>
                 </tr>
                 <tr style="border-bottom: 1px solid #e2e8f0; height: 36px;">
                     <td style="font-weight: 600; color: #475569;">Input Features</td>
-                    <td style="color: #1e293b; font-weight: 600;">7 Numerical Columns</td>
+                    <td style="color: #2e7d32; font-weight: 600;">7 Numerical Columns</td>
                 </tr>
                 <tr style="height: 36px;">
                     <td style="font-weight: 600; color: #475569;">Output Classes</td>
-                    <td style="color: #1e293b; font-weight: 600;">16 Classes (8 Fruits × 2 States)</td>
+                    <td style="color: #2e7d32; font-weight: 600;">16 Classes (8 Fruits × 2 States)</td>
                 </tr>
             </table>
         </div>
@@ -1243,15 +1243,15 @@ elif selected_page == "ℹ️ Model Information":
                 </tr>
                 <tr style="border-bottom: 1px solid #e2e8f0; height: 36px;">
                     <td style="font-weight: 600; color: #475569;">Weighted Average F1-Score</td>
-                    <td style="color: #1e293b; font-weight: 700;">80.24%</td>
+                    <td style="color: #2e7d32; font-weight: 700;">80.24%</td>
                 </tr>
                 <tr style="border-bottom: 1px solid #e2e8f0; height: 36px;">
                     <td style="font-weight: 600; color: #475569;">Test Set Size</td>
-                    <td style="color: #1e293b; font-weight: 600;">640 images (20% stratified)</td>
+                    <td style="color: #2e7d32; font-weight: 600;">640 images (20% stratified)</td>
                 </tr>
                 <tr style="height: 36px;">
                     <td style="font-weight: 600; color: #475569;">Total Segmented Dataset</td>
-                    <td style="color: #1e293b; font-weight: 600;">3,200 images (200 per class)</td>
+                    <td style="color: #2e7d32; font-weight: 600;">3,200 images (200 per class)</td>
                 </tr>
             </table>
         </div>

@@ -957,6 +957,20 @@ elif selected_page == "🔍 Fruit Quality Analysis":
             res = st.session_state.prediction_result
             is_fresh = (res["quality"] == "Fresh")
 
+            image_col1, image_col2 = st.columns(2)
+            with image_col1:
+                st.image(
+                    st.session_state.current_image_pil,
+                    caption="Uploaded fruit",
+                    width="stretch"
+                )
+            with image_col2:
+                st.image(
+                    st.session_state.segmentation_data["preview_white_bg"],
+                    caption="Segmented fruit",
+                    width="stretch"
+                )
+
             card_class = "result-card-fresh" if is_fresh else "result-card-rotten"
             badge_class = "quality-badge-fresh" if is_fresh else "quality-badge-rotten"
             prob_pct = res["probability_percent"]

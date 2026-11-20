@@ -850,9 +850,14 @@ elif selected_page == "🔍 Fruit Quality Analysis":
 
     with col_up1:
         st.markdown("#### 1. Select or Upload Image")
+        sample_list = get_sample_dataset_images()
+        source_options = ["📤 Upload My Own Image"]
+        if sample_list:
+            source_options.append("📁 Select from Dataset Samples")
+
         source_mode = st.radio(
             "Image Source",
-            ["📤 Upload My Own Image", "📁 Select from Dataset Samples"],
+            source_options,
             horizontal=True
         )
 
@@ -873,22 +878,18 @@ elif selected_page == "🔍 Fruit Quality Analysis":
                     st.error(f"Error loading uploaded image: {e}")
 
         else:
-            sample_list = get_sample_dataset_images()
-            if sample_list:
-                sample_options = [f"{s['category']} - {s['name']}" for s in sample_list]
-                chosen_sample_idx = st.selectbox(
-                    "Choose a dataset image:",
-                    range(len(sample_options)),
-                    format_func=lambda i: sample_options[i]
-                )
-                chosen_sample = sample_list[chosen_sample_idx]
-                try:
-                    selected_image_pil = Image.open(chosen_sample["path"]).convert("RGB")
-                    selected_filename = chosen_sample["name"]
-                except Exception as e:
-                    st.error(f"Error loading sample image: {e}")
-            else:
-                st.warning("No sample images found in 'Original Image' folder. Please upload an image.")
+            sample_options = [f"{s['category']} - {s['name']}" for s in sample_list]
+            chosen_sample_idx = st.selectbox(
+                "Choose a dataset image:",
+                range(len(sample_options)),
+                format_func=lambda i: sample_options[i]
+            )
+            chosen_sample = sample_list[chosen_sample_idx]
+            try:
+                selected_image_pil = Image.open(chosen_sample["path"]).convert("RGB")
+                selected_filename = chosen_sample["name"]
+            except Exception as e:
+                st.error(f"Error loading sample image: {e}")
 
         # Display image preview
         if selected_image_pil is not None:

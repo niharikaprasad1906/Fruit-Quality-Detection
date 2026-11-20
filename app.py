@@ -1170,17 +1170,19 @@ elif selected_page == "📊 Feature Analysis":
 
         st.markdown("<br>", unsafe_allow_html=True)
 
-        # Feature Importance Reference from Training Run
-        st.markdown("### 🌟 Model Feature Importance (Trained Benchmark)")
-        feat_imp_path = PROJECT_ROOT / "segmented_feature_importance.csv"
-        if feat_imp_path.exists():
-            imp_df = pd.read_csv(feat_imp_path)
-            imp_df["Importance (%)"] = (imp_df["Importance"] * 100).round(2)
-            st.bar_chart(
-                imp_df.set_index("Feature")["Importance (%)"],
-                use_container_width=True
-            )
-            st.caption("Feature importance ranking recorded during model training on 3,200 segmented samples.")
+    # Feature importance is a fixed training benchmark, independent of an active analysis.
+    st.markdown("### 🌟 Model Feature Importance (Trained Benchmark)")
+    feat_imp_path = PROJECT_ROOT / "segmented_feature_importance.csv"
+    if feat_imp_path.exists():
+        imp_df = pd.read_csv(feat_imp_path)
+        imp_df["Importance (%)"] = (imp_df["Importance"] * 100).round(2)
+        st.bar_chart(
+            imp_df.set_index("Feature")["Importance (%)"],
+            use_container_width=True
+        )
+        st.caption("Feature importance ranking recorded during model training on 3,200 segmented samples.")
+    else:
+        st.warning("The trained feature-importance benchmark is unavailable. Include `segmented_feature_importance.csv` in the deployed app files.")
 
 
 # ==================================================

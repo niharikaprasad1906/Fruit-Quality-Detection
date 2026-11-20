@@ -34,7 +34,6 @@ models/fruit_quality_model.pkl
 random_forest_tuning_results.csv
 class_weight_comparison.csv
 model_comparison_results.csv
-segmented_feature_importance.csv
 segmented_feature_importance.png
 
 # ── Notebooks / temp ────────────────────────────────
